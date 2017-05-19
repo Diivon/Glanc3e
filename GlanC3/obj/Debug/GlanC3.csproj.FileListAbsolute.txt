@@ -1,0 +1,7 @@
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\bin\Debug\GlanC3.dll
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\bin\Debug\GlanC3.pdb
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.Properties.Resources.resources
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.csproj.GenerateResource.Cache
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.dll
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.pdb
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.csprojResolveAssemblyReference.cache

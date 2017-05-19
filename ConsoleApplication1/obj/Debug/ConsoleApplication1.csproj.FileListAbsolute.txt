@@ -1,0 +1,8 @@
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\bin\Debug\GlanC3.dll
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\bin\Debug\GlanC3.pdb
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
