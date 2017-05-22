@@ -44,19 +44,33 @@ class Program {
 
 		var scene = new Scene();
 		var layer1 = new Layer();
+		var enemyLayer = new Layer();
+		enemyLayer.ClassName = "EnemyLayer";
 
 		var hero = new RenderableObject(new Vec2());
 		hero.ClassName = "Hero";
-		hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\1.jpg");
+		hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\Hero.png");
 		hero.AddComponent(new Glc.Component.Script(@"player.gcs"));
 
 		var bullet = new RenderableObject(new Vec2());
 		bullet.ClassName = "Bullet";
 		bullet.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\bullet.jpg");
 		bullet.AddComponent(new Glc.Component.Script(@"bullet.gcs"));
+		bullet.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Circle).SetRadius(5));
+
+		Random rand = new Random();
+
+		for (var i = 0; i < 10; ++i)
+		{
+			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(-400, 400), rand.Next(-300, 300)));
+			enemy.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\n\1.jpg");
+			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(50, 50)));
+			enemyLayer.AddObject(enemy);
+		}
 
 		layer1.AddObject(hero);
 		layer1.AddObject(bullet);
+		scene.AddLayer(enemyLayer);
 		scene.AddLayer(layer1);
 		Glance.AddScene(scene);
 		//-------------Client code ends here

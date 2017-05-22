@@ -92,7 +92,7 @@ namespace Glc
 			}
 			internal static void writeRenderableObject(string declaration, string implementation, RenderableObject PO)
 			{
-				WriteLnIn(declaration, getStdInc() +  templates["Class:RenderableObject:Declaration"]
+				WriteLnIn(declaration, getStdInc() + templates["Class:RenderableObject:Declaration"]
 					.Replace("#ComponentsVariables#", PO.GetComponentsVariables())
 					.Replace("#Pos#", PO.Pos.GetCppCtor())
 					.Replace("#AdditionalConstructorList#", PO.GetComponentsConstructors())
