@@ -49,7 +49,7 @@ class Program {
 
 		var hero = new RenderableObject(new Vec2());
 		hero.ClassName = "Hero";
-		hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\Hero.png");
+		hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\soldier\Soldier1.png");
 		hero.AddComponent(new Glc.Component.Script(@"player.gcs"));
 
 		var bullet = new RenderableObject(new Vec2());

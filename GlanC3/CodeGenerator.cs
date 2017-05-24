@@ -135,7 +135,7 @@ namespace Glc
 					string render = "template<>\ninline void ::gc::Renderer::renderLayer(const " + l.ClassName + " & l){\n";
 					foreach (var i in l._objects)
 						if (i is RenderableObject)
-							render += "this->render(l.getObject<" + i.ClassName + ">().getCurrentSprite(), l.getObject<" + i.ClassName + ">().pos);\n";
+							render += "if (l.getObject<" + i.ClassName + ">().isVisible) this->render(l.getObject<" + i.ClassName + ">().getCurrentSprite(), l.getObject<" + i.ClassName + ">().pos);\n";
 					render += '}';
 
 					WriteLnIn(declaration, getStdInc() + templates["Class:Layer:Declaration"]
