@@ -100,7 +100,7 @@ namespace Glc.Component
 				//
 				var strings = File.ReadAllLines(_owner.FileName);
 				bool isInsideMethod = false;
-				byte tabs = 0; ;
+				byte tabs = 0;
 				var variables = new Dictionary<Glance.FieldsAccessType, List<string>>();
 				List<string> constructors = new List<string>();
 

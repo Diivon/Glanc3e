@@ -57,9 +57,9 @@ namespace Glc
 			dict.gAddOrMerge(GraphComponent.GetCppMethodsDeclaration());
 			//distinct array
 			result += "public:\n";
-			result += Glance.GatherStringList(dict.gGetByKeyOrDefault(Glance.FieldsAccessType.Public).Distinct().ToList(), ";\n");
+			result += Glance.GatherStringList(dict.gGetByKeyOrDefault(Glance.FieldsAccessType.Public).Distinct().ToList(), ";\n") + ';';
 			result += "private:\n";
-			result += Glance.GatherStringList(dict.gGetByKeyOrDefault(Glance.FieldsAccessType.Private).Distinct().ToList(), ";\n");
+			result += Glance.GatherStringList(dict.gGetByKeyOrDefault(Glance.FieldsAccessType.Private).Distinct().ToList(), ";\n") + ';';
 			//some methods may repeat in different components, it's normal
 			return result;
 		}
