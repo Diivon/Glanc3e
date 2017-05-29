@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Glc.Component
+﻿namespace Glc.Component
 {
 	public abstract partial class GraphicalComponent : Component
 	{

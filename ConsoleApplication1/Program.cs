@@ -48,7 +48,7 @@ class Program {
 		var enemyLayer = new Layer();
 		enemyLayer.ClassName = "EnemyLayer";
 
-		var hero = new RenderableObject(new Vec2());
+		var hero = new RenderableObject(new Vec2(400, 300));
 		hero.ClassName = "Hero";
 		hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\soldier\Soldier1.png");
 		hero.AddComponent(new Glc.Component.Script(@"player.gcs"));
@@ -60,12 +60,13 @@ class Program {
 		bullet.AddComponent(new Glc.Component.Script(@"bullet.gcs"));
 		bullet.AddComponent(new Glc.Component.Script(@"tag.gcs"));
 		bullet.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Circle).SetRadius(5));
+		bullet.IsRenderableAtStart = false;
 
 		Random rand = new Random();
 
 		for (var i = 0; i < 10; ++i)
 		{
-			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(-400, 400), rand.Next(-300, 300)));
+			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(0, 800), rand.Next(0, 600)));
 			enemy.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\n\1.jpg");
 			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(50, 50)));
 			enemy.AddComponent(new Glc.Component.Script(@"tag.gcs"));
