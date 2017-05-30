@@ -11,20 +11,21 @@ class Program {
 		Glance.BuildSetting.libDir = @"D:\Glc\lib\SFML\";
 		Glance.BuildSetting.settingsDir = @"D:\Glc\settings\";
 		Glance.BuildSetting.scriptsDir = @"D:\Glc\scripts\";
+		Glance.BuildSetting.compilerDir = @"D:\Glc\compiler\LLVM\bin\"; 
 
-		Glance.BuildSetting.libs.Add("sfml-graphics.lib");
-		Glance.BuildSetting.libs.Add("sfml-window.lib");
-		Glance.BuildSetting.libs.Add("sfml-system.lib");
-		Glance.BuildSetting.libs.Add("sfml-audio.lib");
-		Glance.BuildSetting.libs.Add("sfml-network.lib");
+		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-graphics.lib");
+		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-window.lib");
+		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-system.lib");
+		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-audio.lib");
+		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-network.lib");
 
-		Glance.BuildSetting.compilerKeys = @"/EHsc " + " /I" + Glance.BuildSetting.sourceDir + " /I" + Glance.BuildSetting.includeDir + @" /Zi";
-		Glance.BuildSetting.linkerKeys = @"/LIBPATH:" + Glance.BuildSetting.libDir;
+		Glance.BuildSetting.compilerKeys = "-Wmicrosoft-template " + "-I" + Glance.BuildSetting.sourceDir + " -I" + Glance.BuildSetting.includeDir;
+		Glance.BuildSetting.linkerKeys = @"-l:" + Glance.BuildSetting.libDir;
 
 		Glance.BuildSetting.exeName = "main.exe";
 
 		Glance.BuildSetting.isClearSrcDir = true;
-		Glance.BuildSetting.isGenerateCode = true;
+		Glance.BuildSetting.isGenerateCode = true;	
 		Glance.BuildSetting.isRecompile = true;
 		Glance.BuildSetting.isRunAppAfterCompiling = true;
 		
@@ -64,12 +65,14 @@ class Program {
 
 		Random rand = new Random();
 
-		for (var i = 0; i < 10; ++i)
+		for (var i = 0; i < 50; ++i)
 		{
-			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(0, 800), rand.Next(0, 600)));
-			enemy.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\n\1.jpg");
-			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(50, 50)));
+			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(0, 800), 600));
+			enemy.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\enemy.png");
+			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(54, 94)));
+			enemy.AddComponent(new Glc.Component.Script(@"enemy.gcs"));
 			enemy.AddComponent(new Glc.Component.Script(@"tag.gcs"));
+			//enemy.IsActiveAtStart = false;
 			enemyLayer.AddObject(enemy);
 		}
 

@@ -22,6 +22,8 @@ namespace Glc
 			public static string settingsDir;
 			///<summary>Directory, where scripts(.gcsc) are</summary>
 			public static string scriptsDir;
+			///<summary>Directory, where cpp compiler is</summary>
+			public static string compilerDir;
 
 			///<summary>keys for c++ compiler</summary>
 			public static string compilerKeys;
@@ -95,16 +97,6 @@ namespace Glc
 				ScriptOnStartSignature = "void onStart()";
 			}
 		}
-		/// <summary>Contain all scene of the game</summary>
-		private static List<Scene> scenes;
-		public static void AddScene(Scene s)
-		{
-			scenes.Add(s);
-		}
-		public static List<Scene> GetSceneList()
-		{
-			return scenes;
-		}
 		public static void Build()
 		{
 			if (scenes.Count == 0)
@@ -142,11 +134,13 @@ namespace Glc
 					}
 				}
 				Process cmd = new Process();
-				cmd.StartInfo = new ProcessStartInfo(@"cmd.exe");
+				cmd.StartInfo = new ProcessStartInfo("cmd.exe");
 				cmd.StartInfo.RedirectStandardInput = true;
 				cmd.StartInfo.UseShellExecute = false;
 				cmd.Start();
-				cmd.StandardInput.WriteLine(BuildSetting.settingsDir + Glance.settings["B:EnvVarsConfig"]);
+
+				cmd.StandardInput.WriteLine(Glance.BuildSetting.sourceDir.Substring(0, 2));	//switch to source disk
+				cmd.StandardInput.WriteLine("cd " + Glance.BuildSetting.sourceDir);			//cd to source dir
 				var masterFileName = BuildSetting.sourceDir + @"MasterFile.cpp";
 				Console.WriteLine("Merging files in one master file");
 				using (var fs = new StreamWriter(File.Create(masterFileName)))
@@ -156,8 +150,8 @@ namespace Glc
 						fs.Write(str);
 					}
 				cmd.StandardInput.WriteLine(
-					"cl.exe " + BuildSetting.compilerKeys + ' ' + @"/Fe" + BuildSetting.outputDir + ' ' + 
-					BuildSetting.sourceDir + @"main.cpp " + masterFileName + ' ' + GatherStringList(BuildSetting.libs, " ") +  " /link" + ' ' + BuildSetting.linkerKeys
+					BuildSetting.compilerDir + "clang.exe " + BuildSetting.compilerKeys + ' ' + @"-o" + BuildSetting.outputDir + "a.exe " + 
+					BuildSetting.sourceDir + @"main.cpp " + masterFileName + ' ' + GatherStringList(BuildSetting.libs, " ")
 					);
 
 				if (BuildSetting.isRunAppAfterCompiling)
@@ -169,6 +163,15 @@ namespace Glc
 				cmd.Dispose();
 			}
 		}
+		/// <summary>Contain all scene of the game</summary>
+		public static void AddScene(Scene s)
+		{
+			scenes.Add(s);
+		}
+		public static List<Scene> GetSceneList()
+		{
+			return scenes;
+		}
 
 		public static void Init()
 		{
@@ -177,6 +180,7 @@ namespace Glc
 				ParseGCS(File.ReadAllLines(file), ref templates);
 			ParseGCS(File.ReadAllLines(BuildSetting.settingsDir + "settings.gcs"), ref settings);
 		}
+		private static List<Scene> scenes;
 		///<summary>collection of code presets for all occasions(Class templates as example)</summary>
 		internal static Dictionary<string, string> templates;
 		///<summary>else settings for building</summary>

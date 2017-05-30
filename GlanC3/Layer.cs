@@ -146,7 +146,7 @@ namespace Glc
 			}
 			result += '\n';
 			foreach (var i in _objects)
-				result += i.ObjectName + ".onUpdate(dt);\n";
+				result += "if(" + i.ObjectName + ".isActive) " + i.ObjectName + ".onUpdate(dt);\n";
 			return result;
 		}
 		/// <summary>return all components necessary OnStart code</summary>

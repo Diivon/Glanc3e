@@ -9,7 +9,7 @@ namespace Glc
 		/// <summary>Graphical components of this object</summary>
 		public Component.GraphicalComponent GraphComponent;
 		public bool IsRenderableAtStart;
-		public RenderableObject(Vec2 p, bool isRenderable = true) : base(p)
+		public RenderableObject(Vec2 p, bool isRenderable = true, bool isActive = true) : base(p, isActive)
 		{
 			GraphComponent = null;
 			ClassName = "RenderableObject" + _count++;
@@ -96,6 +96,8 @@ namespace Glc
 			if (GraphComponent == null)
 				throw new InvalidOperationException("GraphComponent for Object " + ClassName + "is empty");
 			string result = "";
+			if (!IsActiveAtStart)
+				result += "self.isActive = false;";
 			foreach (var com in _components)
 			{
 				if (com.GetCppConstructorBody() == "")

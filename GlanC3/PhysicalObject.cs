@@ -7,12 +7,14 @@ namespace Glc
 	public class PhysicalObject : GameObject
 	{
 		public Vec2 Pos;
-		public PhysicalObject(Vec2 pos) : base()
+		public bool IsActiveAtStart;
+		public PhysicalObject(Vec2 pos, bool IsActive = true) : base()
 		{
 			_scene = null;
 			Pos = pos;
 			ClassName = "PhysicalObject" + _count++;
 			ObjectName = "Obj" + ClassName;
+			IsActiveAtStart = IsActive;
 		}
 		static PhysicalObject() { _count = 0; }
 
@@ -77,6 +79,8 @@ namespace Glc
 		internal override string GetComponentsConstructorsBody()
 		{
 			string result = "";
+			if (!IsActiveAtStart)
+				result += "self.isActive = false;";
 			foreach (var com in _components)
 			{
 				if (com.GetCppConstructorBody() == "")
