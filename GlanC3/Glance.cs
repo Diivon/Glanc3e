@@ -150,7 +150,7 @@ namespace Glc
 						fs.Write(str);
 					}
 				cmd.StandardInput.WriteLine(
-					BuildSetting.compilerDir + "clang.exe " + BuildSetting.compilerKeys + ' ' + @"-o" + BuildSetting.outputDir + "a.exe " + 
+					BuildSetting.compilerDir + "clang.exe " + BuildSetting.compilerKeys + ' ' + @"-o" + BuildSetting.outputDir + BuildSetting.exeName + ' ' + 
 					BuildSetting.sourceDir + @"main.cpp " + masterFileName + ' ' + GatherStringList(BuildSetting.libs, " ")
 					);
 

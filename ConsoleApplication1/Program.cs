@@ -34,10 +34,22 @@ class Program {
 
 		//script();
 		game();
+		//emptyGame();
 	}
 	static void script()
 	{
 		Glc.Component.Script.CreateFile(@"D:\a.gcs");
+	}
+	static void emptyGame()
+	{
+		var scene = new Scene();
+		var layer = new Layer();
+		Glance.AddScene(scene);
+		scene.AddLayer(layer);
+		//-------------Client code ends here
+		Glance.Build();
+
+		Console.ReadKey();
 	}
 	static void game()
 	{
@@ -51,28 +63,28 @@ class Program {
 
 		var hero = new RenderableObject(new Vec2(400, 300));
 		hero.ClassName = "Hero";
-		hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\soldier\Soldier1.png");
+		var graph = new Glc.Component.GraphicalComponent.Animation(Glc.Component.GraphicalComponent.AnimationType.Cyclic);
+		graph.AddFrame(new SpriteFrame(@"resources\soldier\Soldier1.png", 400));
+		graph.AddFrame(new SpriteFrame(@"resources\soldier\Soldier2.png", 400));
+		//hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\soldier\Soldier1.png");
+		hero.GraphComponent = graph;
 		hero.AddComponent(new Glc.Component.Script(@"player.gcs"));
-		hero.AddComponent(new Glc.Component.Script(@"tag.gcs"));
 
 		var bullet = new RenderableObject(new Vec2());
 		bullet.ClassName = "Bullet";
 		bullet.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\bullet.jpg");
 		bullet.AddComponent(new Glc.Component.Script(@"bullet.gcs"));
-		bullet.AddComponent(new Glc.Component.Script(@"tag.gcs"));
 		bullet.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Circle).SetRadius(5));
 		bullet.IsRenderableAtStart = false;
 
 		Random rand = new Random();
 
-		for (var i = 0; i < 50; ++i)
+		for (var i = 0; i < 70; ++i)
 		{
 			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(0, 800), 600));
 			enemy.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\enemy.png");
 			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(54, 94)));
 			enemy.AddComponent(new Glc.Component.Script(@"enemy.gcs"));
-			enemy.AddComponent(new Glc.Component.Script(@"tag.gcs"));
-			//enemy.IsActiveAtStart = false;
 			enemyLayer.AddObject(enemy);
 		}
 
