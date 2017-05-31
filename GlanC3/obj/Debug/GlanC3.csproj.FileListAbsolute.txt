@@ -5,3 +5,10 @@ C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.cspr
 C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.dll
 C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.pdb
 C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\GlanC3\obj\Debug\GlanC3.csprojResolveAssemblyReference.cache
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\bin\Debug\GlanC3.dll
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\bin\Debug\GlanC3.pdb
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\obj\Debug\GlanC3.csprojResolveAssemblyReference.cache
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\obj\Debug\GlanC3.Properties.Resources.resources
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\obj\Debug\GlanC3.csproj.GenerateResource.Cache
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\obj\Debug\GlanC3.dll
+D:\Влад\Документы\GitHub\Glanc3e\GlanC3\obj\Debug\GlanC3.pdb

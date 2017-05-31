@@ -149,9 +149,10 @@ namespace Glc
 						var str = File.ReadAllText(i);
 						fs.Write(str);
 					}
+				var libs = GatherStringList(BuildSetting.libs.gfForEach(x => '"' + BuildSetting.libDir + x + '"'), " ");
 				cmd.StandardInput.WriteLine(
-					BuildSetting.compilerDir + "clang.exe " + BuildSetting.compilerKeys + ' ' + @"-o" + BuildSetting.outputDir + BuildSetting.exeName + ' ' + 
-					BuildSetting.sourceDir + @"main.cpp " + masterFileName + ' ' + GatherStringList(BuildSetting.libs, " ")
+					(BuildSetting.compilerDir + "clang.exe").NormalizeForPath() + ' ' + BuildSetting.compilerKeys + ' ' + @"-o" + (BuildSetting.outputDir + BuildSetting.exeName).NormalizeForPath() + ' ' + 
+					(BuildSetting.sourceDir + @"main.cpp").NormalizeForPath() + ' ' + masterFileName + ' ' + libs
 					);
 
 				if (BuildSetting.isRunAppAfterCompiling)
@@ -324,6 +325,7 @@ namespace Glc
 			return line[line.Length - 1];
 		}
 		internal delegate void Del(string i);
+		internal delegate string Del1(string i);
 		internal static string[] gForEach(this string[] list, Del fun)
 		{
 			foreach (var i in list)
@@ -335,6 +337,16 @@ namespace Glc
 			foreach (var i in list)
 				fun(i);
 			return list;
+		}
+		internal static List<string> gfForEach(this List<string> list, Del1 fun)
+		{
+			for(var i = 0; i < list.Count; ++i)
+				list[i] = fun(list[i]);
+			return list;
+		}
+		internal static string NormalizeForPath(this string str)
+		{
+			return '"' + str + '"';
 		}
 		internal static Dictionary<FieldsAccessType, List<string>> gAddOrMerge(this Dictionary<Glance.FieldsAccessType , List<string>> dic, FieldsAccessType t, List<string> list)
 		{

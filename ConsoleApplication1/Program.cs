@@ -13,11 +13,11 @@ class Program {
 		Glance.BuildSetting.scriptsDir = @"D:\Glc\scripts\";
 		Glance.BuildSetting.compilerDir = @"D:\Glc\compiler\LLVM\bin\"; 
 
-		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-graphics.lib");
-		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-window.lib");
-		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-system.lib");
-		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-audio.lib");
-		Glance.BuildSetting.libs.Add(@"D:\Glc\lib\SFML\sfml-network.lib");
+		Glance.BuildSetting.libs.Add(@"sfml-graphics.lib");
+		Glance.BuildSetting.libs.Add(@"sfml-window.lib");
+		Glance.BuildSetting.libs.Add(@"sfml-system.lib");
+		Glance.BuildSetting.libs.Add(@"sfml-audio.lib");
+		Glance.BuildSetting.libs.Add(@"sfml-network.lib");
 
 		Glance.BuildSetting.compilerKeys = "-Wmicrosoft-template " + "-I" + Glance.BuildSetting.sourceDir + " -I" + Glance.BuildSetting.includeDir;
 		Glance.BuildSetting.linkerKeys = @"-l:" + Glance.BuildSetting.libDir;

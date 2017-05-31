@@ -6,3 +6,11 @@ C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\bin\Debu
 C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\XTreme.ws\Desktop\Мусор\cpp\CS\Glanc3\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\bin\Debug\GlanC3.dll
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\bin\Debug\GlanC3.pdb
+D:\Влад\Документы\GitHub\Glanc3e\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
