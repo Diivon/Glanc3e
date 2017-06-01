@@ -155,14 +155,16 @@ namespace Glc
 						}
 					var libs = GatherStringList(BuildSetting.libs.gfForEach(x => (BuildSetting.libDir + x).NormalizeForPath()), " ");
 					cmd.StandardInput.WriteLine(
-						(BuildSetting.compilerDir + "clang.exe").NormalizeForPath() + ' ' + 
+						(BuildSetting.compilerDir + "clang++.exe").NormalizeForPath() + ' ' + 
 						(BuildSetting.sourceDir + @"main.cpp").NormalizeForPath() + ' ' + masterFileName.NormalizeForPath() + ' ' + libs + 
 						' ' + BuildSetting.compilerKeys + ' ' + @"-o" + (BuildSetting.outputDir + BuildSetting.exeName).NormalizeForPath() + ' '
 						);
 
 					if (BuildSetting.isRunAppAfterCompiling)
 					{
-						cmd.StandardInput.WriteLine("D:");
+						if (BuildSetting.outputDir[1] != ':')
+							throw new Exception(BuildSetting.outputDir + " is not absolute");
+						cmd.StandardInput.WriteLine(BuildSetting.sourceDir.Substring(0, 2)); //switch to source disk
 						cmd.StandardInput.WriteLine("cd " + BuildSetting.outputDir);
 						cmd.StandardInput.WriteLine(BuildSetting.exeName);
 					}
