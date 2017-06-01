@@ -68,7 +68,6 @@ class Program {
 		var graph = new Glc.Component.GraphicalComponent.Animation(Glc.Component.GraphicalComponent.AnimationType.Cyclic);
 		graph.AddFrame(new SpriteFrame(@"resources\soldier\Soldier1.png", 400));
 		graph.AddFrame(new SpriteFrame(@"resources\soldier\Soldier2.png", 400));
-		//hero.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\soldier\Soldier1.png");
 		hero.GraphComponent = graph;
 		hero.AddComponent(new Glc.Component.Script(@"player.gcs"));
 
@@ -84,7 +83,10 @@ class Program {
 		for (var i = 0; i < 70; ++i)
 		{
 			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(0, 800), 600));
-			enemy.GraphComponent = new Glc.Component.GraphicalComponent.Sprite(@"resources\enemy.png");
+			var eGraph = new Glc.Component.GraphicalComponent.Animation(Glc.Component.GraphicalComponent.AnimationType.Cyclic);
+			eGraph.AddFrame(new SpriteFrame(@"resources\enemy\enemy1.png", rand.Next(300, 600)));
+			eGraph.AddFrame(new SpriteFrame(@"resources\enemy\enemy2.png", rand.Next(300, 600)));
+			enemy.GraphComponent = eGraph;
 			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(54, 94)));
 			enemy.AddComponent(new Glc.Component.Script(@"enemy.gcs"));
 			enemyLayer.AddObject(enemy);
