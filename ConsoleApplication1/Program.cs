@@ -19,9 +19,11 @@ class Program {
 		Glance.BuildSetting.libs.Add(@"sfml-audio.lib");
 		Glance.BuildSetting.libs.Add(@"sfml-network.lib");
 
-		Glance.BuildSetting.compilerKeys =	" -I" + Glance.BuildSetting.sourceDir + 
-											" -I" + Glance.BuildSetting.includeDir + 
-											" -I" + Glance.BuildSetting.compilerDir + "/../stdlib/include/";
+		Glance.BuildSetting.compilerKeys = " -I" + Glance.BuildSetting.sourceDir +
+											" -I" + Glance.BuildSetting.includeDir +
+											" -I" + Glance.BuildSetting.compilerDir + "/../stdlib/include/" +
+											" -I" + Glance.BuildSetting.compilerDir + "/../stdlib/ucrt/";
+
 		Glance.BuildSetting.linkerKeys = @"-l:" + Glance.BuildSetting.libDir;
 
 		Glance.BuildSetting.exeName = "main.exe";
