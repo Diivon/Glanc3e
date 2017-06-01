@@ -106,7 +106,7 @@ namespace Glc
 							);
 				WriteLnIn(implementation, getStdInc() +  templates["Class:RenderableObject:Implementation"]
 					.Replace("#ComponentsVariables#", PO.GetComponentsVariables())
-					.Replace("#Pos#", PO.Pos.x.ToString() + ", " + PO.Pos.y.ToString())
+					.Replace("#Pos#", PO.Pos.GetCppCtor())
 					.Replace("#AdditionalConstructorList#", PO.GetComponentsConstructors())
 					.Replace("#ConstructorBody#", PO.GetComponentsConstructorsBody())
 					.Replace("#ComponentsMethods#", PO.GetComponentsMethodsImplementation())
