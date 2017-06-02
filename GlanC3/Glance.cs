@@ -133,35 +133,42 @@ namespace Glc
 							BuildSetting.complilerTargets.Add(BuildSetting.sourceDir + obj.GetImplementationFileName());
 					}
 				}
-				Process cmd = new Process();
-				cmd.StartInfo = new ProcessStartInfo("cmd.exe");
-				cmd.StartInfo.RedirectStandardInput = true;
-				cmd.StartInfo.UseShellExecute = false;
-				cmd.Start();
-
-				cmd.StandardInput.WriteLine(Glance.BuildSetting.sourceDir.Substring(0, 2));	//switch to source disk
-				cmd.StandardInput.WriteLine("cd " + Glance.BuildSetting.sourceDir);			//cd to source dir
-				var masterFileName = BuildSetting.sourceDir + @"MasterFile.cpp";
-				Console.WriteLine("Merging files in one master file");
-				using (var fs = new StreamWriter(File.Create(masterFileName)))
-					foreach (var i in BuildSetting.complilerTargets)
-					{
-						var str = File.ReadAllText(i);
-						fs.Write(str);
-					}
-				var libs = GatherStringList(BuildSetting.libs.gfForEach(x => '"' + BuildSetting.libDir + x + '"'), " ");
-				cmd.StandardInput.WriteLine(
-					(BuildSetting.compilerDir + "clang.exe").NormalizeForPath() + ' ' + BuildSetting.compilerKeys + ' ' + @"-o" + (BuildSetting.outputDir + BuildSetting.exeName).NormalizeForPath() + ' ' + 
-					(BuildSetting.sourceDir + @"main.cpp").NormalizeForPath() + ' ' + masterFileName + ' ' + libs
-					);
-
-				if (BuildSetting.isRunAppAfterCompiling)
+				using (Process cmd = new Process())
 				{
-					cmd.StandardInput.WriteLine("D:");
-					cmd.StandardInput.WriteLine("cd " + BuildSetting.outputDir);
-					cmd.StandardInput.WriteLine(BuildSetting.exeName);
+					cmd.StartInfo = new ProcessStartInfo("cmd.exe");
+					cmd.StartInfo.RedirectStandardInput = true;
+					cmd.StartInfo.UseShellExecute = false;
+					cmd.Start();
+
+					if (BuildSetting.sourceDir[1] != ':')
+						throw new Exception(BuildSetting.sourceDir + " is not absolute");
+
+					cmd.StandardInput.WriteLine(BuildSetting.sourceDir.Substring(0, 2)); //switch to source disk
+					cmd.StandardInput.WriteLine("cd " + Glance.BuildSetting.sourceDir);         //cd to source dir
+					var masterFileName = BuildSetting.sourceDir + @"MasterFile.cpp";
+					Console.WriteLine("Merging files in one master file");
+					using (var fs = new StreamWriter(File.Create(masterFileName)))
+						foreach (var i in BuildSetting.complilerTargets)
+						{
+							var str = File.ReadAllText(i);
+							fs.Write(str);
+						}
+					var libs = GatherStringList(BuildSetting.libs.gfForEach(x => (BuildSetting.libDir + x).NormalizeForPath()), " ");
+					cmd.StandardInput.WriteLine(
+						(BuildSetting.compilerDir + "clang++.exe").NormalizeForPath() + ' ' + 
+						(BuildSetting.sourceDir + @"main.cpp").NormalizeForPath() + ' ' + masterFileName.NormalizeForPath() + ' ' + libs + 
+						' ' + BuildSetting.compilerKeys + ' ' + @"-o" + (BuildSetting.outputDir + BuildSetting.exeName).NormalizeForPath() + ' '
+						);
+
+					if (BuildSetting.isRunAppAfterCompiling)
+					{
+						if (BuildSetting.outputDir[1] != ':')
+							throw new Exception(BuildSetting.outputDir + " is not absolute");
+						cmd.StandardInput.WriteLine(BuildSetting.sourceDir.Substring(0, 2)); //switch to source disk
+						cmd.StandardInput.WriteLine("cd " + BuildSetting.outputDir);
+						cmd.StandardInput.WriteLine(BuildSetting.exeName);
+					}
 				}
-				cmd.Dispose();
 			}
 		}
 		/// <summary>Contain all scene of the game</summary>

@@ -12,7 +12,7 @@
 		/// <returns>::gc::Vec2(x, y)</returns>
 		public string GetCppCtor()
 		{
-			return "::gc::Vec2(" + x + ", " + y + ')';
+			return "::gc::Vec2(" + x.ToString().Replace(',', '.') + ", " + y.ToString().Replace(',', '.') + ')';
 		}
 	}
 }

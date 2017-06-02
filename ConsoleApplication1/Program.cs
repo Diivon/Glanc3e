@@ -19,9 +19,11 @@ class Program {
 		Glance.BuildSetting.libs.Add(@"sfml-audio.lib");
 		Glance.BuildSetting.libs.Add(@"sfml-network.lib");
 
-		Glance.BuildSetting.compilerKeys =	" -I" + Glance.BuildSetting.sourceDir + 
-											" -I" + Glance.BuildSetting.includeDir + 
-											" -I" + Glance.BuildSetting.compilerDir + "/../stdlib/include/";
+		Glance.BuildSetting.compilerKeys = " -I" + Glance.BuildSetting.sourceDir +
+											" -I" + Glance.BuildSetting.includeDir +
+											" -I" + Glance.BuildSetting.compilerDir + "/../stdlib/include/" +
+											" -I" + Glance.BuildSetting.compilerDir + "/../stdlib/ucrt/";
+
 		Glance.BuildSetting.linkerKeys = @"-l:" + Glance.BuildSetting.libDir;
 
 		Glance.BuildSetting.exeName = "main.exe";
@@ -82,10 +84,10 @@ class Program {
 
 		for (var i = 0; i < 70; ++i)
 		{
-			var enemy = new Glc.RenderableObject(new Vec2(rand.Next(0, 800), 600));
+			var enemy = new Glc.RenderableObject(new Vec2((float)rand.Next(0, 800), (float)600.54));
 			var eGraph = new Glc.Component.GraphicalComponent.Animation(Glc.Component.GraphicalComponent.AnimationType.Cyclic);
-			eGraph.AddFrame(new SpriteFrame(@"resources\enemy\enemy1.png", rand.Next(300, 600)));
-			eGraph.AddFrame(new SpriteFrame(@"resources\enemy\enemy2.png", rand.Next(300, 600)));
+			eGraph.AddFrame(new SpriteFrame(@"resources\enemy\enemy1.png", (float)rand.Next(300, 600)));
+			eGraph.AddFrame(new SpriteFrame(@"resources\enemy\enemy2.png", (float)rand.Next(300, 600)));
 			enemy.GraphComponent = eGraph;
 			enemy.AddComponent(new Glc.Component.Collider(Glc.Component.Collider.Type.Rectangle).SetSize(new Vec2(54, 94)));
 			enemy.AddComponent(new Glc.Component.Script(@"enemy.gcs"));
