@@ -139,27 +139,25 @@ namespace Glc
 				cmd.StartInfo.UseShellExecute = false;
 				cmd.Start();
 
-				Console.WriteLine("Merging files in one master file");
+				cmd.StandardInput.WriteLine(Glance.BuildSetting.sourceDir.Substring(0, 2));	//switch to source disk
+				cmd.StandardInput.WriteLine("cd " + Glance.BuildSetting.sourceDir);			//cd to source dir
 				var masterFileName = BuildSetting.sourceDir + @"MasterFile.cpp";
+				Console.WriteLine("Merging files in one master file");
 				using (var fs = new StreamWriter(File.Create(masterFileName)))
 					foreach (var i in BuildSetting.complilerTargets)
 					{
 						var str = File.ReadAllText(i);
 						fs.Write(str);
 					}
-				cmd.StandardInput.WriteLine(BuildSetting.sourceDir.Substring(0, 2));	//switch to source disk
-				cmd.StandardInput.WriteLine("cd " + BuildSetting.sourceDir);			//cd to source dir
-				cmd.StandardInput.WriteLine(BuildSetting.settingsDir + templates["B:EnvVarsConfig"]);
 				var libs = GatherStringList(BuildSetting.libs.gfForEach(x => '"' + BuildSetting.libDir + x + '"'), " ");
 				cmd.StandardInput.WriteLine(
-					"cl.exe " + BuildSetting.compilerKeys + ' ' + @"/Fe" + BuildSetting.outputDir + ' ' +
-					BuildSetting.sourceDir + @"main.cpp " + masterFileName + ' ' + GatherStringList(BuildSetting.libs, " ") + " /link" + ' ' + BuildSetting.linkerKeys
+					(BuildSetting.compilerDir + "clang.exe").NormalizeForPath() + ' ' + BuildSetting.compilerKeys + ' ' + @"-o" + (BuildSetting.outputDir + BuildSetting.exeName).NormalizeForPath() + ' ' + 
+					(BuildSetting.sourceDir + @"main.cpp").NormalizeForPath() + ' ' + masterFileName + ' ' + libs
 					);
+
 				if (BuildSetting.isRunAppAfterCompiling)
 				{
-					if (BuildSetting.outputDir[1] != ':')
-						throw new Exception();
-					cmd.StandardInput.WriteLine(BuildSetting.outputDir.Substring(0, 2));
+					cmd.StandardInput.WriteLine("D:");
 					cmd.StandardInput.WriteLine("cd " + BuildSetting.outputDir);
 					cmd.StandardInput.WriteLine(BuildSetting.exeName);
 				}
@@ -181,6 +179,7 @@ namespace Glc
 			var files = Directory.GetFiles(BuildSetting.settingsDir, "T_*.gcs");
 			foreach (var file in files)
 				ParseGCS(File.ReadAllLines(file), ref templates);
+			ParseGCS(File.ReadAllLines(BuildSetting.settingsDir + "settings.gcs"), ref settings);
 		}
 		private static List<Scene> scenes;
 		///<summary>collection of code presets for all occasions(Class templates as example)</summary>
