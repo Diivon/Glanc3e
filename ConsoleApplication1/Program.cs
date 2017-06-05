@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 class Program {
-    static void Main(string[] args)
+	static void Main(string[] args)
 	{
 		Glance.BuildSetting.outputDir = @"D:\Glc\out\";
 		Glance.BuildSetting.sourceDir = @"D:\Glc\src\";
@@ -11,7 +11,7 @@ class Program {
 		Glance.BuildSetting.libDir = @"D:\Glc\lib\SFML\";
 		Glance.BuildSetting.settingsDir = @"D:\Glc\settings\";
 		Glance.BuildSetting.scriptsDir = @"D:\Glc\scripts\";
-		Glance.BuildSetting.compilerDir = @"D:\Glc\compiler\LLVM\bin\"; 
+		Glance.BuildSetting.compilerDir = @"D:\Glc\compiler\LLVM\bin\";
 
 		Glance.BuildSetting.libs.Add(@"sfml-graphics.lib");
 		Glance.BuildSetting.libs.Add(@"sfml-window.lib");
@@ -19,28 +19,20 @@ class Program {
 		Glance.BuildSetting.libs.Add(@"sfml-audio.lib");
 		Glance.BuildSetting.libs.Add(@"sfml-network.lib");
 
-		Glance.BuildSetting.compilerKeys = @"/EHsc " + " /I" + Glance.BuildSetting.sourceDir + " /I" + Glance.BuildSetting.includeDir + @" /Zi";
+		Glance.BuildSetting.compilerKeys = @"/EHsc " + " /I" + Glance.BuildSetting.sourceDir + " /I" + Glance.BuildSetting.includeDir;
 		Glance.BuildSetting.linkerKeys = @"/LIBPATH:" + Glance.BuildSetting.libDir;
-
-		Glance.BuildSetting.linkerKeys = @"-l:" + Glance.BuildSetting.libDir;
 
 		Glance.BuildSetting.exeName = "main.exe";
 
 		Glance.BuildSetting.isClearSrcDir = true;
-		Glance.BuildSetting.isGenerateCode = true;	
+		Glance.BuildSetting.isGenerateCode = true;
 		Glance.BuildSetting.isRecompile = true;
 		Glance.BuildSetting.isRunAppAfterCompiling = true;
-		
+
 		Glance.Init();
 		//------------------------------------------------
 
-		//script();
 		game();
-		//emptyGame();
-	}
-	static void script()
-	{
-		Glc.Component.Script.CreateFile(@"D:\a.gcs");
 	}
 	static void emptyGame()
 	{

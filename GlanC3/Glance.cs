@@ -156,8 +156,10 @@ namespace Glc
 					cmd.StandardInput.WriteLine(BuildSetting.settingsDir + templates["B:EnvVarsConfig"]);
 					var libs = GatherStringList(BuildSetting.libs.gfForEach(x => (BuildSetting.libDir + x).NormalizeForPath()), " ");
 					cmd.StandardInput.WriteLine(
-						"cl.exe " + BuildSetting.compilerKeys + ' ' + @"/Fe" + BuildSetting.outputDir + ' ' +
-						BuildSetting.sourceDir + @"main.cpp " + masterFileName + ' ' + GatherStringList(BuildSetting.libs, " ") + " /link" + ' ' + BuildSetting.linkerKeys
+						"cl.exe" + (BuildSetting.sourceDir + "main.cpp").NormalizeForPath() + (masterFileName).NormalizeForPath()
+						+ GatherStringList(BuildSetting.libs.gfForEach(x => x.NormalizeForPath()), " ")
+						+ " /I" + BuildSetting.includeDir + @" /Fe" + BuildSetting.outputDir
+						+ " /link" + ' ' + BuildSetting.linkerKeys
 						);
 
 					if (BuildSetting.isRunAppAfterCompiling)
@@ -346,9 +348,10 @@ namespace Glc
 		}
 		internal static List<string> gfForEach(this List<string> list, Del1 fun)
 		{
-			for(var i = 0; i < list.Count; ++i)
-				list[i] = fun(list[i]);
-			return list;
+			var result = new List<string>();
+			for (var i = 0; i < list.Count; ++i)
+				result.Add(fun(list[i]));
+			return result;
 		}
 		internal static string NormalizeForPath(this string str)
 		{
